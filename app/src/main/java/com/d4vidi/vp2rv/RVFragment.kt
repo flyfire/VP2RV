@@ -14,10 +14,7 @@ import android.view.ViewGroup
 import com.d4vidi.vp2rv.adapter.IDemoVH
 import com.d4vidi.vp2rv.adapter.PageModel
 import com.d4vidi.vp2rv.adapter.RichDemoRVAdapter
-import com.d4vidi.vp2rv.core.RVPageScrollState
-import com.d4vidi.vp2rv.core.RVPagerSnapHelperListenable
-import com.d4vidi.vp2rv.core.RVPagerStateListener
-import com.d4vidi.vp2rv.core.VisiblePageState
+import com.d4vidi.vp2rv.core.*
 
 class RVFragment : Fragment() {
     private var mActivity: AppCompatActivity? = null
@@ -63,6 +60,10 @@ class RVFragment : Fragment() {
                 vh?.onSelected()
             }
         })
+
+        val cardWidthPixels = (rv.context.resources.displayMetrics.widthPixels * 0.6f).toInt()
+        val cardHintPercent = 0.01f
+        rv.addItemDecoration(RVPagerSnapFancyDecorator(rv.context, cardWidthPixels, cardHintPercent))
 
         val toolbar = mActivity!!.findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = "RecyclerViewPager Demo"
